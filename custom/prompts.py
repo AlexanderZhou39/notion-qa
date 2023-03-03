@@ -78,3 +78,57 @@ FINAL ANSWER:"""
 CUSTOM_COMBINE_PROMPT = PromptTemplate(
     template=custom_combine_prompt_template, input_variables=["summaries", "question"]
 )
+
+
+validation_prompt = """
+Given a list of statements separated by ":::" and given a list of content, respond with the statements from the given list that are directly related to the content. If the statement is "I don't know", include it in the response. If none of the statements are directly related to the content, respond with "I don't know".
+
+STATEMENTS: Pie is a meal enjoyed by many. ::: Pie contains many calories. ::: Pie is a math constant.
+=========
+CONTENT: Pie is a popular meal enjoyed by many during thanksgiving.
+
+CONTENT: Pie is a mathematical constant denotating the ratio of a circle's diameter and circumference.
+
+CONTENT: Pie is made with bread, sugar, and milk.
+
+=========
+RELATED: Pie is a meal enjoyed by many. ::: Pie is a math constant.
+
+STATEMENTS: I don't know
+=========
+CONTENT: Ring a round the rosie, pocket full of fishies, ashes ashes.
+
+CONTENT: Tomato is a soup.
+
+CONTENT: Chickens are dinosaurs.
+
+=========
+RELATED: I don't know
+
+STATEMENTS: Cheesits taste good ::: bob likes broccoli ::: why are LLMs so hard to work with
+=========
+CONTENT: Cheese is a national delicacy.
+
+CONTENT: We should give all dogs mandatory breaks.
+
+CONTENT: cats are better than dogs and you cannot change my mind.
+
+=========
+RELATED: I don't know
+
+STATEMENTS: Mitochondria are organelles of cells ::: Michondria are the powerhouse of the cell ::: The singular of mitochondria is mitochondrion
+=========
+CONTENT: Mitochondria is an organelle found in large numbers in most cells, in which the biochemical processes of respiration and energy production occur. It has a double membrane, the inner layer being folded inward to form layers (cristae).
+
+CONTENT: Mitochondria are membrane-bound cell organelles (mitochondrion, singular) that generate most of the chemical energy needed to power the cell's biochemical reactions. Chemical energy produced by the mitochondria is stored in a small molecule called adenosine triphosphate (ATP). Mitochondria contain their own small chromosomes.
+
+CONTENT: mitochondrion, membrane-bound organelle found in the cytoplasm of almost all eukaryotic cells (cells with clearly defined nuclei), the primary function of which is to generate large quantities of energy in the form of adenosine triphosphate (ATP).
+
+=========
+RELATED: Mitochondria are organelles of cells
+
+STATEMENTS: {statements}
+=========
+{contents}
+=========
+RELATED:"""
