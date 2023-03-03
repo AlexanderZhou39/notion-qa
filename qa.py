@@ -27,10 +27,13 @@ chain = CustomChain.from_llm(
 )
 result = chain({"question": args.question})
 answers = result['answer'].split(':::')
+# for doc in result['docs']:
+#     print(doc.page_content)
 
-print('validating answers...')
+print('\n\nvalidating answers...')
 validated_result = validate_answers(result)
-print('Validated:\n', validated_result, '\n\n')
+print('\n\nOriginal:\n', result['answer'].strip(), '\n')
+print('Validated:\n', validated_result, '\n')
 print('Sources:\n', result['sources'])
 
 # print(f"Answer: {result['answer']}")
