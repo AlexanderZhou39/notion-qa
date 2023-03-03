@@ -14,6 +14,9 @@ def validate_answers(result):
         contents=contents
     )
 
+    if "I don't know" in answer:
+        return "I don't know"
+
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo", 
         temperature=0,
