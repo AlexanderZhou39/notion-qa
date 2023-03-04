@@ -1,7 +1,6 @@
 from langchain.prompts import PromptTemplate
 
-custom_combine_prompt_template = """Given the following extracted parts of a long document and a question, create up to three possible answers to the question using the given content. Separate the answers with ":::". Quote statements from the given content in your answers.
-If the provided content is insufficient to answer the question, respond with "I don't know".
+custom_combine_prompt_template = """Given the following extracted parts of a long document and a question, create up to three possible answers to the question using the given content. Separate the answers with ":::".
 Cite the sources used in the answer with "SOURCES".
 ALWAYS return a "SOURCES" part in your answer.
 QUESTION: What is Flat Earth Theory?
@@ -35,7 +34,7 @@ Source: 5-pl
 Content: More support for patients and families. \n\nTo get there, I call on Congress to fund ARPA-H, the Advanced Research Projects Agency for Health. \n\nIt’s based on DARPA—the Defense Department project that led to the Internet, GPS, and so much more.  \n\nARPA-H will have a singular purpose—to drive breakthroughs in cancer, Alzheimer’s, diabetes, and more. \n\nA unity agenda for the nation. \n\nWe can do this. \n\nMy fellow Americans—tonight , we have gathered in a sacred space—the citadel of our democracy. \n\nIn this Capitol, generation after generation, Americans have debated great questions amid great strife, and have done great things. \n\nWe have fought for freedom, expanded liberty, defeated totalitarianism and terror. \n\nAnd built the strongest, freest, and most prosperous nation the world has ever known. \n\nNow is the hour. \n\nOur moment of responsibility. \n\nOur test of resolve and conscience, of history itself. \n\nIt is in this moment that our character is formed. Our purpose is found. Our future is forged. \n\nWell I know this nation.
 Source: 34-pl
 =========
-FINAL ANSWER: I don't know
+FINAL ANSWER: The president did not mention Michael Jackson.
 SOURCES:
 QUESTION: {question}
 =========
@@ -81,7 +80,7 @@ CUSTOM_COMBINE_PROMPT = PromptTemplate(
 
 
 validation_prompt = """
-Given a list of statements and the following extracted parts of a long document, respond with a single statement from the given list that are most similar in word choice to the document. 
+Given a list of statements and the following extracted parts of a long document, respond with one of the statements from the list that is most similar in word choice to the document. 
 If none of the statements are similar in word choice to the content, respond with "I don't know".
 
 Statements: Pie contains many calories. ::: Pie is a meal enjoyed by many. ::: Pie contains a lot of carbohydrates.

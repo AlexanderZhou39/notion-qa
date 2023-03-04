@@ -5,6 +5,7 @@ from langchain import OpenAI
 from custom.chain import CustomChain
 from custom.prompts import CUSTOM_COMBINE_PROMPT
 from custom.validation import validate_answers
+from custom.llm import CustomOpenAI
 import pickle
 import argparse
 
@@ -21,7 +22,7 @@ with open("faiss_store.pkl", "rb") as f:
 store.index = index
 print('running initial prompt...')
 chain = CustomChain.from_llm(
-    llm=OpenAI(temperature=0), 
+    llm=CustomOpenAI(temperature=0, model_name="gpt-3.5-turbo"), 
     combine_prompt=CUSTOM_COMBINE_PROMPT,
     vectorstore=store
 )
