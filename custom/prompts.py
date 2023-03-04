@@ -1,6 +1,7 @@
 from langchain.prompts import PromptTemplate
 
 custom_combine_prompt_template = """Given the following extracted parts of a long document and a question, create up to three possible answers to the question using the given content. Separate the answers with ":::".
+If the provided content is insufficient to answer the question, respond with "I don't know".
 Cite the sources used in the answer with "SOURCES".
 ALWAYS return a "SOURCES" part in your answer.
 QUESTION: What is Flat Earth Theory?
@@ -12,6 +13,17 @@ Source: 19-pl
 ==========
 FINAL ANSWER: A theory that the Earth is flat
 SOURCES: 15-pl
+QUESTION: What are the pros and cons to box pleating?
+==========
+Content: Box pleating lets you have more control over the paper and design more complex models.
+Source: 39-pl
+Content: Box pleating makes everything into grids, causing you to have to fold a lot of boring precreases.
+Source: 13-pl
+Content: Box pleating has a higher learning curve compared to other techniques.
+Source: 12-pl 
+==========
+FINAL ANSWER: Pros: Box pleating lets you have more control over the paper and design more complex models. Cons: Box pleating causes a lot of boring precreases and has a higher learning curve.
+SOURCES: 39-pl, 13-pl, 12-pl
 QUESTION: Which state/country's law governs the interpretation of the contract?
 ==========
 Content: This Agreement is governed by English law and the parties submit to the exclusive jurisdiction of the English courts in  relation to any dispute (contractual or non-contractual) concerning this Agreement save that either party may apply to any court for an  injunction or other relief to protect its Intellectual Property Rights.
@@ -34,7 +46,7 @@ Source: 5-pl
 Content: More support for patients and families. \n\nTo get there, I call on Congress to fund ARPA-H, the Advanced Research Projects Agency for Health. \n\nIt’s based on DARPA—the Defense Department project that led to the Internet, GPS, and so much more.  \n\nARPA-H will have a singular purpose—to drive breakthroughs in cancer, Alzheimer’s, diabetes, and more. \n\nA unity agenda for the nation. \n\nWe can do this. \n\nMy fellow Americans—tonight , we have gathered in a sacred space—the citadel of our democracy. \n\nIn this Capitol, generation after generation, Americans have debated great questions amid great strife, and have done great things. \n\nWe have fought for freedom, expanded liberty, defeated totalitarianism and terror. \n\nAnd built the strongest, freest, and most prosperous nation the world has ever known. \n\nNow is the hour. \n\nOur moment of responsibility. \n\nOur test of resolve and conscience, of history itself. \n\nIt is in this moment that our character is formed. Our purpose is found. Our future is forged. \n\nWell I know this nation.
 Source: 34-pl
 =========
-FINAL ANSWER: The president did not mention Michael Jackson.
+FINAL ANSWER: I don't know
 SOURCES:
 QUESTION: {question}
 =========
@@ -99,6 +111,21 @@ Content: cats are better than dogs and you cannot change my mind.
 Content: Slimes are very squishy.
 =========
 RELATED: I don't know
+
+Statements: bob likes broccoli ::: LLMs are hard to work with ::: Cheese tastes good 
+=========
+Content: Cheese is a national delicacy.
+Content: We should give all dogs mandatory breaks.
+Content: cats are better than dogs and you cannot change my mind.
+Content: Slimes are very squishy.
+=========
+RELATED: I don't know
+
+Statements: Cheesits taste good
+=========
+Content: Cheeseits taste very good.
+=========
+RELATED: Cheesits taste good
 
 Statements: Michondria are the powerhouse of the cell ::: The singular of mitochondria is mitochondrion ::: Mitochondria are organelles of cells
 =========
