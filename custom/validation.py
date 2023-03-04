@@ -21,7 +21,7 @@ def validate_answers(result):
         model="gpt-3.5-turbo", 
         temperature=0,
         messages=[
-            {"role": "system", "content": "You are a helpful assistant"},
+            {"role": "system", "content": "You are a helpful assistant. Only use the sources provided. Do not use outside information or guess answers."},
             {"role": "user", "content": formatted_prompt}
         ]
     )

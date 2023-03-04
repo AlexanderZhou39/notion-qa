@@ -14,8 +14,8 @@ class CustomChain(VectorDBQAWithSourcesChain):
         docs = self._get_docs(inputs)
         # print(docs[0])
         answer, _ = self.combine_documents_chain.combine_docs(docs, **inputs)
-        if "SOURCES: " in answer:
-            answer, sources = answer.split("SOURCES: ")
+        if "SOURCES:" in answer:
+            answer, sources = answer.split("SOURCES:")
         else:
             sources = ""
         return {self.answer_key: answer, self.sources_answer_key: sources, 'docs': docs}

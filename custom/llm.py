@@ -103,7 +103,7 @@ class CustomOpenAI(BaseOpenAI):
                 response = completion_with_retry(
                     self, 
                     messages=[
-                        { 'role': 'system', 'content': 'you are a helpful assistant' },
+                        { 'role': 'system', 'content': 'you are a helpful assistant. Only use the sources provided. Do not use outside information or guess answers.' },
                         { 'role': 'user', 'content': p }
                     ], 
                     **params
